@@ -1,0 +1,30 @@
+PODS:
+  - BTNavigationDropdownMenu (0.5)
+  - GMStepper (2.2)
+  - Realm (3.16.2):
+    - Realm/Headers (= 3.16.2)
+  - Realm/Headers (3.16.2)
+  - RealmSwift (3.16.2):
+    - Realm (= 3.16.2)
+
+DEPENDENCIES:
+  - BTNavigationDropdownMenu
+  - GMStepper
+  - RealmSwift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BTNavigationDropdownMenu
+    - GMStepper
+    - Realm
+    - RealmSwift
+
+SPEC CHECKSUMS:
+  BTNavigationDropdownMenu: ba3a26fdb6a56c4721c31df8a0875106c259663a
+  GMStepper: 89fb106944dfcc3aa3add7164e3ebd463ea2104b
+  Realm: 0e73b4edeb5b6a90da3d83206883b2e34e00eb38
+  RealmSwift: a81e650171ef0a5f999df1ed8d39ba8d6fce88a4
+
+PODFILE CHECKSUM: f311b9a8398f01db26a63e2759b538fe4a8140c8
+
+COCOAPODS: 1.7.2
