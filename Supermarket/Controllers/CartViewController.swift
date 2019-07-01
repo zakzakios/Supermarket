@@ -82,6 +82,16 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            dataBase.removeProductFromCart(productId: arrayCart[indexPath.row].productId, transactionType: arrayCart[indexPath.row].transactionType)
+            arrayCart.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+           
+        }
+    }
+    
     private func configureCell(cell: CartCell, for indexPatch: IndexPath) {
         let product = dataBase.getProductById(id: arrayCart[indexPatch.row].productId)
          if let product = product, let transactionSelected = transactionSelected {

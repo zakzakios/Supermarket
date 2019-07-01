@@ -59,6 +59,33 @@ class DBManager {
         }
     }
     
+    func updateProductTitle(id: Int, title: String) {
+        let results = database.objects(ProductModel.self).filter("ID == \(id)")
+        if let product = results.first {
+            try!   database.write {
+                product.title = title
+            }
+        }
+    }
+    
+    func updateProductCost(id: Int, cost: Double) {
+        let results = database.objects(ProductModel.self).filter("ID == \(id)")
+        if let product = results.first {
+            try!   database.write {
+                product.cost = cost
+            }
+        }
+    }
+    
+    func updateProductCategory(id: Int, category: String) {
+        let results = database.objects(ProductModel.self).filter("ID == \(id)")
+        if let product = results.first {
+            try!   database.write {
+                product.category = category
+            }
+        }
+    }
+    
     func updateCountCart(productId: Int, transactionType: String, count: Int) {
         let results = database.objects(CartModel.self).filter("productId = %@", productId).filter("transactionType = %@", transactionType)
         if let cart = results.first {
@@ -86,10 +113,11 @@ class DBManager {
         }
     }
     
-    func removeProductFromCart(id: Int)   {
-        let result = database.objects(CartModel.self).filter("ID == \(id)")
+    func removeProductFromCart(productId: Int, transactionType: String)   {
+        let result = database.objects(CartModel.self).filter("productId = %@", productId).filter("transactionType = %@", transactionType)
         if let productCart = result.first {
         try!   database.write {
+            productCart.count = 0
             database.delete(productCart)
         }
         }

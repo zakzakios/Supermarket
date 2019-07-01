@@ -117,15 +117,17 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         isEditableView(editable: true, borderStyle: .roundedRect)
         categoryTextField.addTarget(self, action: #selector(chooseCategory), for: .editingDidBegin)
         costTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
+        titleTextField.addTarget(self, action: #selector(editingEndTitle(textField:)), for: .editingDidEnd)
+        costTextField.addTarget(self, action: #selector(editingEndCost(textField:)), for: .editingDidEnd)
         addNavigationButton(title: String.titleSaveButton, action: #selector(saveTapped))
     }
     
     @objc func saveTapped(){
         isEditableView(editable: false, borderStyle: .none)
         addNavigationButton(title: String.titleEditButton, action: #selector(editTapped))
-        let delCharSet = CharacterSet(charactersIn: "$")
+        let delChar = CharacterSet(charactersIn: "$")
         if let category = categoryTextField.text, let title = titleTextField.text,
-            let cost = Double(costTextField.text!.trimmingCharacters(in: delCharSet)), let id = recivedId {
+            let cost = Double(costTextField.text!.trimmingCharacters(in: delChar)), let id = recivedId {
                dataBase.updateProduct(id: id, category: category, title: title, cost: cost)
         }
     }
@@ -145,6 +147,19 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     @objc func myTextFieldDidChange(_ textField: UITextField) {
         if let amountString = costTextField.text?.currencyInputFormatting() {
             costTextField.text = amountString
+        }
+    }
+    
+    @objc func editingEndTitle(textField: UITextField) {
+        if let title = textField.text, let id = recivedId {
+            dataBase.updateProductTitle(id: id, title: title)
+        }
+    }
+    
+    @objc func editingEndCost(textField: UITextField) {
+        let delChar = CharacterSet(charactersIn: "$")
+        if let cost = Double(textField.text!.trimmingCharacters(in: delChar)), let id = recivedId {
+            dataBase.updateProductCost(id: id, cost: cost)
         }
     }
     
@@ -246,6 +261,9 @@ extension DetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         UserDefaults.standard.set(categoryList[row], forKey: "selected")
+        if let id = recivedId {
+        dataBase.updateProductCategory(id: id, category: categoryList[row])
+        }
     }
 }
 
