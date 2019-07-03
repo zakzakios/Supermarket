@@ -14,6 +14,8 @@
 		5B778AB222C35A4E009CBD2A /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B778AB122C35A4E009CBD2A /* ProductModel.swift */; };
 		5B778AB522C35D34009CBD2A /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B778AB422C35D34009CBD2A /* DBManager.swift */; };
 		5B778AB722C360BD009CBD2A /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B778AB622C360BD009CBD2A /* CartModel.swift */; };
+		5B853DDA22CC996600851C5A /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B853DD822CC996600851C5A /* TableViewCell.swift */; };
+		5B853DDB22CC996600851C5A /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B853DD922CC996600851C5A /* TableViewCell.xib */; };
 		5BB030C122C7559500904447 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB030C022C7559500904447 /* Extension.swift */; };
 		5BD8629022C879B5002C51EF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B667D2B22C1F2E500E03F26 /* DetailViewController.swift */; };
 		5BD8629122C879CA002C51EF /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6025EA22C6040200F4D77A /* CartViewController.swift */; };
@@ -36,6 +38,8 @@
 		5B778AB122C35A4E009CBD2A /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		5B778AB422C35D34009CBD2A /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		5B778AB622C360BD009CBD2A /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		5B853DD822CC996600851C5A /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		5B853DD922CC996600851C5A /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		5BB030C022C7559500904447 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		A84308DD29714C785816CC76 /* Pods-Supermarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Supermarket.release.xcconfig"; path = "Target Support Files/Pods-Supermarket/Pods-Supermarket.release.xcconfig"; sourceTree = "<group>"; };
 		D36BF33AF8A7307932BAA9DD /* Pods_Supermarket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Supermarket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				5B153BC122C0BC1100CD6D66 /* AppDelegate.swift */,
+				5B853DD722CC991900851C5A /* Cell */,
 				5BD8628F22C872B0002C51EF /* Controllers */,
 				5BB030BF22C7554700904447 /* Utils */,
 				5B778AB022C359E9009CBD2A /* Model */,
@@ -103,6 +108,15 @@
 				5B778AB422C35D34009CBD2A /* DBManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		5B853DD722CC991900851C5A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5B853DD822CC996600851C5A /* TableViewCell.swift */,
+				5B853DD922CC996600851C5A /* TableViewCell.xib */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		5BB030BF22C7554700904447 /* Utils */ = {
@@ -202,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B153BCC22C0BC1200CD6D66 /* LaunchScreen.storyboard in Resources */,
+				5B853DDB22CC996600851C5A /* TableViewCell.xib in Resources */,
 				5B153BC922C0BC1200CD6D66 /* Assets.xcassets in Resources */,
 				5B153BC722C0BC1100CD6D66 /* Main.storyboard in Resources */,
 			);
@@ -261,6 +276,7 @@
 				5BD8629122C879CA002C51EF /* CartViewController.swift in Sources */,
 				5BD8629022C879B5002C51EF /* DetailViewController.swift in Sources */,
 				5B778AB222C35A4E009CBD2A /* ProductModel.swift in Sources */,
+				5B853DDA22CC996600851C5A /* TableViewCell.swift in Sources */,
 				5B153BC222C0BC1100CD6D66 /* AppDelegate.swift in Sources */,
 				5BB030C122C7559500904447 /* Extension.swift in Sources */,
 				5B778AB722C360BD009CBD2A /* CartModel.swift in Sources */,

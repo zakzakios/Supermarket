@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BTNavigationDropdownMenu
 
 class Extension {
     func createMockData() {
@@ -105,6 +106,20 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    func configureMenu(navigationController: UINavigationController, items: [String],
+                       navigationItem: UINavigationItem) -> BTNavigationDropdownMenu {
+        let menuView = BTNavigationDropdownMenu(navigationController: navigationController, containerView: navigationController.view, title: BTTitle.title(items[0]), items: items)
+        menuView.arrowTintColor = .black
+        menuView.arrowPadding = 15
+        menuView.cellBackgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
+        menuView.cellSelectionColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
+        menuView.shouldKeepSelectedCellColor = true
+        menuView.cellTextLabelFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        menuView.navigationBarTitleFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        navigationItem.titleView = menuView
+        return menuView
     }
 }
 

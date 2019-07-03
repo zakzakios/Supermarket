@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="TableViewCell" customModule="Supermarket" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="95.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0sm-IV-Dof">
+                        <rect key="frame" x="16" y="4" width="86" height="86"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="86" id="1ac-Ce-9W3"/>
+                            <constraint firstAttribute="height" constant="86" id="ORf-VA-dZb"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Стиральный порошок" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c06-ry-2My">
+                        <rect key="frame" x="110" y="11" width="147" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="x3X-c4-k84"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxY-H7-JWP" customClass="GMStepper" customModule="GMStepper">
+                        <rect key="frame" x="213" y="57" width="91" height="28"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="91" id="5cA-ff-QQz"/>
+                            <constraint firstAttribute="height" constant="28" id="Ezs-9V-X8z"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
+                                <real key="value" value="5000"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="stepValue">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="49,99 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ueo-q9-PGa">
+                        <rect key="frame" x="110" y="61" width="62" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Cfa-Cp-IlA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="c06-ry-2My" firstAttribute="leading" secondItem="0sm-IV-Dof" secondAttribute="trailing" constant="8" id="04o-or-uk1"/>
+                    <constraint firstItem="c06-ry-2My" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="DOy-d3-ReH"/>
+                    <constraint firstAttribute="bottom" secondItem="0sm-IV-Dof" secondAttribute="bottom" constant="5.5" id="QoX-6p-pxh"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c06-ry-2My" secondAttribute="trailing" constant="16" id="RoJ-gf-fd0"/>
+                    <constraint firstItem="0sm-IV-Dof" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="c40-la-wfK"/>
+                    <constraint firstAttribute="trailing" secondItem="LxY-H7-JWP" secondAttribute="trailing" constant="16" id="cqi-uP-f1R"/>
+                    <constraint firstAttribute="bottom" secondItem="LxY-H7-JWP" secondAttribute="bottom" constant="10.5" id="ecX-BF-k8F"/>
+                    <constraint firstItem="Ueo-q9-PGa" firstAttribute="leading" secondItem="0sm-IV-Dof" secondAttribute="trailing" constant="8" id="k91-kj-9qd"/>
+                    <constraint firstAttribute="bottom" secondItem="Ueo-q9-PGa" secondAttribute="bottom" constant="13.5" id="ony-SH-YVm"/>
+                    <constraint firstItem="0sm-IV-Dof" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="y5E-bq-UUD"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="costLabel" destination="Ueo-q9-PGa" id="mh5-ca-n5a"/>
+                <outlet property="previewImage" destination="0sm-IV-Dof" id="dJF-96-Qnc"/>
+                <outlet property="stepper" destination="LxY-H7-JWP" id="Ddz-oP-zIs"/>
+                <outlet property="titleLabel" destination="c06-ry-2My" id="qg2-ad-sGc"/>
+            </connections>
+            <point key="canvasLocation" x="96" y="124.13793103448276"/>
+        </tableViewCell>
+    </objects>
+</document>

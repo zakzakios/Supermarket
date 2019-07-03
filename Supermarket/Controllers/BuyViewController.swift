@@ -20,6 +20,7 @@ class BuyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        TableViewCell.register(inTableView: buyTableView)
         buyTableView.dataSource = self
         buyTableView.delegate = self
         self.title = String.titleBuy
@@ -44,33 +45,19 @@ extension BuyViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.buyTableView.dequeueReusableCell(withIdentifier: "BuyCell", for: indexPath as IndexPath) as! BuyCell
-        configureCell(cell: cell, for: indexPath)
-        return cell
+       if  let cell = self.buyTableView.dequeueReusableCell(withIdentifier: TableViewCell.identifier, for: indexPath) as? TableViewCell
+         {
+            cell.configureWithItem(product: arrayProduct[indexPath.row], indexPatch: indexPath.row,
+                                   cell: cell, transactionType: Transaction.Buy.rawValue, isCart: false)
+          return cell
+          }
+        return UITableViewCell()
+       
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         recivedId = arrayProduct[indexPath.row].ID
         self.performSegue(withIdentifier: "detailSegue", sender: self)
-    }
-    
-    private func configureCell(cell: BuyCell, for indexPatch: IndexPath) {
-        let product = arrayProduct[indexPatch.row]
-        cell.titleLabel.text = product.title
-        cell.costLabel.text = "$" + String(product.cost)
-        let tag = indexPatch.row
-        cell.tag = tag
-        if cell.tag == tag {
-            cell.previewImage.downloaded(from: product.url)
-        }
-        cell.stepper.labelFont = UIFont(name: String.fontStepper, size: 14.0)!
-        cell.stepper.tag = product.ID
-        if let countCart = dataBase.getCountToId(productId: product.ID, transactionType: Transaction.Buy.rawValue) {
-            cell.stepper.value = Double(countCart)
-        } else {
-            cell.stepper.value = 0
-        }
-        cell.stepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -80,26 +67,6 @@ extension BuyViewController: UITableViewDataSource, UITableViewDelegate {
         detailViewController.transactionType = Transaction.Buy.rawValue
     }
     
-    @objc func stepperValueChanged(stepper: GMStepper) {
-        let id = stepper.tag
-        if dataBase.getCartById(productId: id, transactionType: Transaction.Buy.rawValue) != nil {
-            dataBase.updateCountCart(productId: id, transactionType: Transaction.Buy.rawValue, count: Int(stepper.value))
-        } else {
-            let cartModel = CartModel()
-            cartModel.productId = id
-            cartModel.count = Int(stepper.value)
-            cartModel.transactionEnum = .Buy
-            dataBase.addProductToCart(object: cartModel)
-        }
-    }
-    
-}
-
-class BuyCell: UITableViewCell {
-    @IBOutlet weak var stepper: GMStepper!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var costLabel: UILabel!
-    @IBOutlet weak var previewImage: UIImageView!
 }
 
 

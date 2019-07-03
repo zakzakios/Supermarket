@@ -24,16 +24,21 @@ class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        TableViewCell.register(inTableView: cartTableView)
         cartTableView.dataSource = self
         cartTableView.delegate = self
         self.title = String.titleCart
-        
         for transaction in Transaction.allValues {
             transactionList.append(transaction.rawValue)
         }
         transactionSelected = Transaction.Buy.rawValue
         selectTransaction()
-        configureMenu()
+        configureMenu(navigationController: self.navigationController!, items: transactionList,
+                      navigationItem: self.navigationItem).didSelectItemAtIndexHandler = {(indexPath: Int) -> Void in
+                        self.transactionSelected = self.transactionList[indexPath]
+                        self.selectTransaction()
+                        self.cartTableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,23 +53,6 @@ class CartViewController: UIViewController {
             self.arrayCart = self.arrayCartTransaction
         }
     }
-    
-    private func configureMenu() {
-        let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.title(transactionList[0]), items: transactionList)
-        menuView.arrowTintColor = .black
-        menuView.arrowPadding = 15
-        menuView.cellBackgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
-        menuView.cellSelectionColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
-        menuView.shouldKeepSelectedCellColor = true
-        menuView.cellTextLabelFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        menuView.navigationBarTitleFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> Void in
-            self.transactionSelected = self.transactionList[indexPath]
-            self.selectTransaction()
-            self.cartTableView.reloadData()
-        }
-        self.navigationItem.titleView = menuView
-    }
 }
 
 extension CartViewController: UITableViewDataSource, UITableViewDelegate {
@@ -77,9 +65,15 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.cartTableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath as IndexPath) as! CartCell
-        configureCell(cell: cell, for: indexPath)
-        return cell
+        if  let cell = self.cartTableView.dequeueReusableCell(withIdentifier: TableViewCell.identifier, for: indexPath) as? TableViewCell
+        {
+            guard let product = dataBase.getProductById(id: arrayCart[indexPath.row].productId),
+                let transactionSelected = transactionSelected else { return UITableViewCell() }
+            cell.configureWithItem(product: product, indexPatch: indexPath.row, cell: cell,
+                                   transactionType: transactionSelected, isCart: true)
+            return cell
+        }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -87,32 +81,7 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
             dataBase.removeProductFromCart(productId: arrayCart[indexPath.row].productId, transactionType: arrayCart[indexPath.row].transactionType)
             arrayCart.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-           
         }
     }
     
-    private func configureCell(cell: CartCell, for indexPatch: IndexPath) {
-        let product = dataBase.getProductById(id: arrayCart[indexPatch.row].productId)
-         if let product = product, let transactionSelected = transactionSelected {
-            cell.titleLabel.text = product.title
-            cell.costLabel.text = "$" + String(product.cost)
-            cell.previewImage.downloaded(from: product.url)
-            
-            cell.stepper.labelFont = UIFont(name: String.fontStepper, size: 14.0)!
-            if let countCart = dataBase.getCountToId(productId: product.ID, transactionType: transactionSelected) {
-                cell.stepper.value = Double(countCart)
-            } else {
-                cell.stepper.value = 0
-            }
-        }
-    }
-    
-}
-
-class CartCell: UITableViewCell {
-    @IBOutlet weak var stepper: GMStepper!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var costLabel: UILabel!
-    @IBOutlet weak var previewImage: UIImageView!
 }
